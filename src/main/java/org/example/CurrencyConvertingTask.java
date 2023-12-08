@@ -1,7 +1,6 @@
 package org.example;
 
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -14,11 +13,9 @@ import java.util.Scanner;
 import java.util.Set;
 
 public class CurrencyConvertingTask {
-
     private static final String API_URL = "https://api.apilayer.com/fixer/convert";
     private static final String API_KEY = "d5MyKOGZ9BNKHHexSjZJMzhAYWYW4Ij9";
     private static final Set<String> favoriteCurrencies = new HashSet<>();
-
     public static void main(String[] args) {
         CurrencyConvertingTask converter = new CurrencyConvertingTask();
         Scanner scanner = new Scanner(System.in);
