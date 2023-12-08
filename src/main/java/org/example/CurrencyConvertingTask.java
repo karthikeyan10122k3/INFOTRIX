@@ -29,9 +29,9 @@ public class CurrencyConvertingTask {
             System.out.println("5. Exit");
 
             System.out.print("Enter your choice : ");
-            int choice = scanner.nextInt();
+            int ch = scanner.nextInt();
 
-            switch (choice) {
+            switch (ch) {
                 case 1 -> converter.convertCurrency();
                 case 2 -> converter.viewFavoriteCurrencies();
                 case 3 -> converter.addFavoriteCurrency();
