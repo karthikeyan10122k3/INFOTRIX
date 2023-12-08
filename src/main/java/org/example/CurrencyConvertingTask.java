@@ -1,6 +1,7 @@
 package org.example;
 
 import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -8,7 +9,9 @@ import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.*;
+import java.util.HashSet;
+import java.util.Scanner;
+import java.util.Set;
 
 public class CurrencyConvertingTask {
 
@@ -46,15 +49,14 @@ public class CurrencyConvertingTask {
     }
     public static void convertCurrency() {
         Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter amount: ");
+        double amount = scanner.nextDouble();
 
         System.out.print("Enter the source currency \n Example:(USD,INR,EUR,AED,NGN) : ");
         String sourceCurrency = scanner.next().toUpperCase();
 
         System.out.print("Enter the target currency : ");
         String targetCurrency = scanner.next().toUpperCase();
-
-        System.out.print("Enter amount: ");
-        double amount = scanner.nextDouble();
 
         try {
             URI uri = new URI(API_URL + String.format("?from=%s&to=%s&amount=%f", sourceCurrency, targetCurrency, amount));
@@ -80,10 +82,11 @@ public class CurrencyConvertingTask {
                 double result = json.getDouble("result");
                 System.out.printf("%.2f %s = %.2f %s%n", amount, sourceCurrency, result, targetCurrency);
             } else {
-                System.out.println("Unable to perform currency conversion.");
+                System.out.println("Unable to perform currency conversion. Response: " + response.toString());
             }
         } catch (IOException | URISyntaxException e) {
             e.printStackTrace();
+            System.out.println("Please check your input and try again.");
         }
     }
     public static void viewFavoriteCurrencies() {
@@ -91,7 +94,7 @@ public class CurrencyConvertingTask {
         if (favoriteCurrencies.isEmpty()) {
             System.out.println("No favorite currencies added.");
         } else {
-            favoriteCurrencies.forEach(currency -> System.out.println("* "+currency));
+            favoriteCurrencies.forEach(currency -> System.out.println("* " + currency));
         }
     }
     public static void addFavoriteCurrency() {
@@ -110,7 +113,7 @@ public class CurrencyConvertingTask {
         if (favoriteCurrencies.isEmpty()) {
             System.out.println("No favorite currencies added.");
         } else {
-            favoriteCurrencies.forEach(currency -> System.out.println("* "+currency));
+            favoriteCurrencies.forEach(currency -> System.out.println("* " + currency));
         }
 
         System.out.print("Enter the currency code to remove from favorites: ");
